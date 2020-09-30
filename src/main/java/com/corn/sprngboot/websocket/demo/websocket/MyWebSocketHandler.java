@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2020/9/28 16:40
  */
 
-@Component
+//@Component
 public class MyWebSocketHandler implements WebSocketHandler {
 
 

@@ -1,6 +1,6 @@
 package com.corn.sprngboot.websocket.demo.controller;
 
-import com.corn.sprngboot.websocket.demo.websocket.MyWebSocketHandler;
+import com.corn.sprngboot.websocket.demo.netty.MyNettyWebSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +21,7 @@ import java.io.IOException;
 public class SendMsgController {
 
     @Autowired
-    private MyWebSocketHandler myWebSocketHandler;
+    private MyNettyWebSocketHandler myWebSocketHandler;
 
 
     @RequestMapping("/sendMsg")
