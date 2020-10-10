@@ -35,17 +35,19 @@ public class MyHasdShakeInterceptor extends HttpSessionHandshakeInterceptor {
         /**
          * 获取url传递的参数，通过attributes在Interceptor处理结束后传递给WebSocketHandler,
          * WebSocketHandler可以通过WebSocketSession的getAttributes()方法获取参数
-         * "ws://127.0.0.1:18080/testWebsocket?id=23&name=Lebron"
+         * ws://127.0.0.1:8080/testWebSocket?userId=1&userName=corn&roomId=1
          */
         ServletServerHttpRequest serverRequest = (ServletServerHttpRequest) request;
-        String id = serverRequest.getServletRequest().getParameter("id");
-        String name = serverRequest.getServletRequest().getParameter("name");
+        String userId = serverRequest.getServletRequest().getParameter("userId");
+        String userName = serverRequest.getServletRequest().getParameter("userName");
+        String roomId = serverRequest.getServletRequest().getParameter("roomId");
 
         //鉴权
-        if ("1".equals(id) && "corn".equals(name)) {
+        if (true) {
             System.out.println("Validation passed. WebSocket connecting.... ");
-            attributes.put("id", id);
-            attributes.put("name", name);
+            attributes.put("userId", userId);
+            attributes.put("userName", userName);
+            attributes.put("roomId", roomId);
             return super.beforeHandshake(request, response, wsHandler, attributes);
         } else {
             System.out.println("Validation failed. WebSocket will not connect. ");

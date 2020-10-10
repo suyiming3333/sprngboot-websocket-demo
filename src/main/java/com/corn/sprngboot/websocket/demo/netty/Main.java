@@ -19,7 +19,7 @@ public class Main {
 			ServerBootstrap b = new ServerBootstrap();
 			b.group(bossGroup, workGroup);
 			b.channel(NioServerSocketChannel.class);
-			b.childHandler(new MyWebSocketChannelHandler());
+			b.childHandler(new MyNettyWebSocketChannelHandler());
 			System.out.println("服务端开启等待客户端连接....");
 			Channel ch = b.bind(8888).sync().channel();
 			ch.closeFuture().sync();

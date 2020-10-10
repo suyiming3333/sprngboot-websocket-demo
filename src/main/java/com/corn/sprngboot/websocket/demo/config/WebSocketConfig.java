@@ -1,5 +1,6 @@
 package com.corn.sprngboot.websocket.demo.config;
 
+import com.corn.sprngboot.websocket.demo.websocket.MyClusterWebSocketHandler;
 import com.corn.sprngboot.websocket.demo.websocket.MyHasdShakeInterceptor;
 import com.corn.sprngboot.websocket.demo.websocket.MyWebSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +20,22 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
  * @date 2020/9/28 17:03
  */
 
-//@Configuration
-//@EnableWebSocket
+@Configuration
+@EnableWebSocket
 public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
 
     @Autowired
     private MyWebSocketHandler myWebSocketHandler;
 
+    @Autowired
+    private MyClusterWebSocketHandler myClusterWebSocketHandler;
+
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
         webSocketHandlerRegistry
-                .addHandler(myWebSocketHandler, "/testWebSocket")//添加接收请求的handler
+                .addHandler(myClusterWebSocketHandler, "/testWebSocket")//添加接收请求的handler
                 .addInterceptors(new MyHasdShakeInterceptor())//添加拦截器(用于处理参数)
-                .setAllowedOrigins("http://www.websocket-test1.com");//设置origins源
+                .setAllowedOrigins("http://www.websocket-test.com");//设置origins源
 
     }
 }

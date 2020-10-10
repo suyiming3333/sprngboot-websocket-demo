@@ -12,11 +12,11 @@ public class SprngbootWebsocketDemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(SprngbootWebsocketDemoApplication.class, args);
 
-        try {
-            new NettyServer(12345).run();
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            new NettyServer(12345).run();
+//        }catch(Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
 }

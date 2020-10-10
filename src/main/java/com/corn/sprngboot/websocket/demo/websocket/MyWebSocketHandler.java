@@ -1,5 +1,7 @@
 package com.corn.sprngboot.websocket.demo.websocket;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 
@@ -18,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2020/9/28 16:40
  */
 
-//@Component
+@Component
 public class MyWebSocketHandler implements WebSocketHandler {
 
 
@@ -38,7 +40,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
      */
     @Override
     public void afterConnectionEstablished(WebSocketSession webSocketSession) throws Exception {
-        sessionsMap.put(webSocketSession.getAttributes().get("id").toString(),webSocketSession);
+        sessionsMap.put(webSocketSession.getAttributes().get("userId").toString(),webSocketSession);
         sessions.add(webSocketSession);
         int onlineNum = addOnlineCount();
         System.out.println("Oprn a WebSocket. Current connection number: " + onlineNum);
@@ -57,14 +59,14 @@ public class MyWebSocketHandler implements WebSocketHandler {
         if (webSocketSession.isOpen()) {
             webSocketSession.close();
         }
-        sessionsMap.remove(webSocketSession.getAttributes().get("id").toString());
+        sessionsMap.remove(webSocketSession.getAttributes().get("userId").toString());
         sessions.remove(webSocketSession);
         subOnlineCount();
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession webSocketSession, CloseStatus closeStatus) throws Exception {
-        sessionsMap.remove(webSocketSession.getAttributes().get("id").toString());
+        sessionsMap.remove(webSocketSession.getAttributes().get("userId").toString());
         sessions.remove(webSocketSession);
         int onlineNum = subOnlineCount();
         System.out.println("Close a webSocket. Current connection number: " + onlineNum);
